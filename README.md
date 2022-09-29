@@ -4,7 +4,7 @@ Manages an Application Insights component.
 
 ## Getting Started
 
-- Format and validate terraform code before commit.
+- Format and validate Terraform code before commit.
 
 ```shell
 terraform init -upgrade \
@@ -17,7 +17,7 @@ terraform init -upgrade \
 - Always fetch latest changes from upstream and rebase from it. Terraform documentation will always be updated with GitHub Actions. See also [.github/workflows/terraform.yml](.github/workflows/terraform.yml) GitHub Actions workflow.
 
 ```shell
-git fetch --all --prune --prune-tags \
+git fetch --all --tags --prune --prune-tags \
   && git pull --rebase --all --prune --tags
 ```
 
