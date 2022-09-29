@@ -71,5 +71,5 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_azurerm_application_insights"></a> [azurerm\_application\_insights](#output\_azurerm\_application\_insights) | n/a |
+| <a name="output_azurerm_application_insights"></a> [azurerm\_application\_insights](#output\_azurerm\_application\_insights) | The Application Insights resource. |
 <!-- END_TF_DOCS -->
