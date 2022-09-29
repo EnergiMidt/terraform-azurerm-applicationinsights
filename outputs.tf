@@ -1,3 +1,4 @@
 output "azurerm_application_insights" {
-  value = azurerm_application_insights.insights
+  description = "The Application Insights resource."
+  value       = azurerm_application_insights.insights
 }
