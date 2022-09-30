@@ -1,4 +1,4 @@
-# [terraform-azurerm-applicationinsights](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_insights)
+# [terraform-azurerm-applicationinsights][1]
 
 Manages an Application Insights component.
 
@@ -73,3 +73,5 @@ No modules.
 |------|-------------|
 | <a name="output_azurerm_application_insights"></a> [azurerm\_application\_insights](#output\_azurerm\_application\_insights) | The Application Insights resource. |
 <!-- END_TF_DOCS -->
+
+[1]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_insights
