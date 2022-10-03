@@ -71,7 +71,7 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_azurerm_application_insights"></a> [azurerm\_application\_insights](#output\_azurerm\_application\_insights) | The Application Insights resource. |
+| <a name="output_azurerm_application_insights"></a> [azurerm\_application\_insights](#output\_azurerm\_application\_insights) | The Azure Application Insights resource. |
 <!-- END_TF_DOCS -->
 
 [1]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_insights
