@@ -5,8 +5,8 @@ locals {
 
 resource "azurerm_application_insights" "insights" {
   name                = local.name
-  resource_group_name = var.resource_group.name
   location            = local.location
+  resource_group_name = var.resource_group.name
 
   application_type                      = var.application_type
   daily_data_cap_in_gb                  = var.daily_data_cap_in_gb
