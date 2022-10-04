@@ -3,7 +3,7 @@ locals {
   location = var.override_location == null ? var.resource_group.location : var.override_location
 }
 
-resource "azurerm_application_insights" "insights" {
+resource "azurerm_application_insights" "application_insights" {
   name                = local.name
   location            = local.location
   resource_group_name = var.resource_group.name
