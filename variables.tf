@@ -1,14 +1,3 @@
-variable "name" {
-  description = " (Required) Specifies the name of the Application Insights component. Changing this forces a new resource to be created."
-  type        = string
-}
-
-variable "override_name" {
-  description = "(Optional) Override the name of the resource. Under normal circumstances, it should not be used."
-  type        = string
-  default     = ""
-}
-
 variable "environment" {
   description = "(Required) The name of the environment."
   type        = string
@@ -18,32 +7,49 @@ variable "environment" {
       "test",
       "prod",
     ], var.environment)
-    error_message = "Valid options are dev, test, and prod."
+    error_message = "Possible values are dev, test, and prod."
   }
 }
 
+# This `name` variable is replaced by the use of `system_name` and `environment` variables.
+# variable "name" {
+#   description = "(Required) The name which should be used for this resource. Changing this forces a new resource to be created."
+#   type        = string
+# }
+
+variable "system_name" {
+  description = "(Required) The systen name which should be used for this resource. Changing this forces a new resource to be created."
+  type        = string
+}
+
+variable "override_name" {
+  description = "(Optional) Override the name of the resource. Under normal circumstances, it should not be used."
+  default     = null
+  type        = string
+}
+
+variable "override_location" {
+  description = "(Optional) Override the location of the resource. Under normal circumstances, it should not be used."
+  default     = null
+  type        = string
+}
+
 variable "resource_group" {
-  description = "(Required) The resource group in which to create the Application Insights component."
+  description = "(Required) The resource group in which to create the resource."
   type        = any
 }
 
-# This upstream variable is replaced by the use of `resource_group` variable.
+# This `resource_group_name` variable is replaced by the use of `resource_group` variable.
 # variable "resource_group_name" {
-#   description = "(Required) The name of the resource group in which the Log Analytics workspace is created. Changing this forces a new resource to be created."
+#   description = "(Required) The name of the resource group where the resource should exist. Changing this forces a new resource to be created."
 #   type        = string
 # }
 
-# This upstream variable is replaced by the use of `resource_group` variable.
+# This `location` variable is replaced by the use of `resource_group` variable.
 # variable "location" {
-#   description = "(Required) Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created."
+#   description = "(Required) The location where the resource should exist. Changing this forces a new resource to be created."
 #   type        = string
 # }
-
-variable "override_location" {
-  description = "(Optional) Specifies whether to override the location of the resource. Usually, it should not be used."
-  default     = ""
-  type        = string
-}
 
 variable "application_type" {
   default     = "other"
@@ -108,12 +114,6 @@ variable "disable_ip_masking" {
   type        = bool
 }
 
-variable "tags" {
-  description = "(Optional) A mapping of tags to assign to the resource."
-  default     = {}
-  type        = map(string)
-}
-
 variable "workspace_id" {
   description = "(Optional) Specifies the id of a log analytics workspace resource. Changing this forces a new resource to be created."
   default     = null
@@ -142,4 +142,10 @@ variable "force_customer_storage_for_profiler" {
   description = "(Optional) Should the Application Insights component force users to create their own storage account for profiling? Defaults to `false`."
   default     = false
   type        = bool
+}
+
+variable "tags" {
+  description = "(Optional) A mapping of tags to assign to the resource."
+  type        = map(string)
+  default     = {}
 }

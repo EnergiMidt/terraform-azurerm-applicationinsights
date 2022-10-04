@@ -4,30 +4,29 @@ name: Terraform
 on:
   push:
     branches:
-      - 'main'
-      - 'docs/**'
-      - 'feature/**'
-      - 'fix/**'
-      - 'wip/**'
+      - "main"
+      - "docs/**"
+      - "feature/**"
+      - "fix/**"
+      - "wip/**"
     paths-ignore:
-      - '**/**.md'
+      - "**/**.md"
   pull_request:
     branches:
-      - 'docs/**'
-      - 'feature/**'
-      - 'fix/**'
-      - 'wip/**'
+      - "docs/**"
+      - "feature/**"
+      - "fix/**"
+      - "wip/**"
     paths-ignore:
-      - '**/**.md'
-
+      - "**/**.md"
 
 jobs:
   terraform:
-    name: 'Terraform'
+    name: "Terraform"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: 'Inject Terraform Documentation'
+      - name: "Inject Terraform Documentation"
         uses: terraform-docs/gh-actions@v1
         with:
           working-dir: .
@@ -37,7 +36,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
-          terraform_version: 1.3.0
+          terraform_version: 1.3.1
       - name: Terraform Format Check
         run: terraform fmt -check
         id: fmt
