@@ -83,7 +83,7 @@ variable "application_type" {
 
 variable "daily_data_cap_in_gb" {
   description = "(Optional) Specifies the Application Insights component daily data volume cap in GB."
-  default     = null
+  default     = 0.15
   type        = number
 }
 
@@ -94,8 +94,8 @@ variable "daily_data_cap_notifications_disabled" {
 }
 
 variable "retention_in_days" {
-  default     = "90"
-  description = "(Optional) Specifies the retention period in days. Possible values are `30`, `60`, `90`, `120`, `180`, `270`, `365`, `550` or `730`. Defaults to `90`."
+  default     = "30"
+  description = "(Optional) Specifies the retention period in days. Possible values are `30`, `60`, `90`, `120`, `180`, `270`, `365`, `550` or `730`. Defaults to `30` for cost optimization instead of upstream `90`."
   type        = number
   validation {
     condition = contains([
