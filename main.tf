@@ -50,11 +50,6 @@ resource "azurerm_application_insights_web_test" "web_test" {
   timeout                 = each.value.timeout
   enabled                 = each.value.enabled
   geo_locations           = each.value.geo_locations
-  # [
-  #   # https://learn.microsoft.com/en-gb/azure/azure-monitor/app/monitor-web-app-availability#azure
-  #   "emea-gb-db3-azr", # North Europe
-  #   "emea-nl-ams-azr"  # West Europe
-  # ]
 
   configuration = <<XML
 <WebTest
@@ -94,7 +89,7 @@ resource "azurerm_application_insights_web_test" "web_test" {
       IgnoreHttpStatusCode="False" />
   </Items>
 </WebTest>
-  XML
+XML
 
   tags = var.tags
 }
