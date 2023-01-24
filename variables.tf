@@ -169,7 +169,7 @@ variable "web_test_endpoints" {
       frequency     = number
       timeout       = number
       enabled       = bool
-      geo_locations = map(string)
+      geo_locations = list(string)
     })
   )
   default = null
