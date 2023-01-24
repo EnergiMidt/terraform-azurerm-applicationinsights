@@ -160,3 +160,34 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "web_test_endpoints" {
+  description = <<EOT
+(Optional) The map of endpoints for availability tests.
+Example:
+```
+{
+  "webTestName" = {
+    url : "Specify the URL to test."
+    kind : "The kind of web test that this web test watches. Choices are ping and multistep."
+    frequency : "Interval in seconds between test runs for this WebTest. Valid options are 300, 600 and 900."
+    timeout : "Seconds until this WebTest will timeout and fail."
+    enabled : "Is the test actively being monitored?"
+    geo_locations : "A list of where to physically run the tests from to give global coverage for accessibility of your application."
+  }
+}
+```
+EOT
+
+  type = map(
+    object({
+      url           = string
+      kind          = string
+      frequency     = number
+      timeout       = number
+      enabled       = bool
+      geo_locations = list(string)
+    })
+  )
+  default = {}
+}
