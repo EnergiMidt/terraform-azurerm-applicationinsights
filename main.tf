@@ -45,7 +45,7 @@ resource "azurerm_application_insights_web_test" "web_test" {
   location                = local.location
   resource_group_name     = var.resource_group.name
   application_insights_id = azurerm_application_insights.application_insights.id
-  kind                    = "ping"
+  kind                    = each.value.kind
   frequency               = each.value.frequency
   timeout                 = each.value.timeout
   enabled                 = each.value.enabled

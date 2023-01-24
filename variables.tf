@@ -166,6 +166,7 @@ variable "web_test_endpoints" {
   type = map(
     object({
       endpoint      = string
+      kind          = string
       frequency     = number
       timeout       = number
       enabled       = bool
