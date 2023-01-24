@@ -41,7 +41,7 @@ resource "azurerm_application_insights_web_test" "web_test" {
   # Use `azurerm_application_insights_standard_web_test` resource for standard web test.
   # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_insights_standard_web_test
 
-  name                    = "${local.name}-webtest-${each.key}"
+  name                    = "${local.name}-availabilitytest-${each.key}"
   location                = local.location
   resource_group_name     = var.resource_group.name
   application_insights_id = azurerm_application_insights.application_insights.id
