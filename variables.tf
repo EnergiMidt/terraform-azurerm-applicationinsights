@@ -172,7 +172,7 @@ variable "web_test_endpoints" {
       geo_locations = list(string)
     })
   )
-  default = null
+  default = {}
 }
 
 # variable "web_test_kind" {
