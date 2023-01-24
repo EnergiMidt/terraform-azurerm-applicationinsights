@@ -33,7 +33,7 @@ git fetch --all --tags --prune --prune-tags \
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.37.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.40.0 |
 
 ## Modules
 
@@ -44,6 +44,7 @@ No modules.
 | Name | Type |
 |------|------|
 | [azurerm_application_insights.application_insights](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_insights) | resource |
+| [azurerm_application_insights_web_test.web_test](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_insights_web_test) | resource |
 
 ## Inputs
 
@@ -66,6 +67,7 @@ No modules.
 | <a name="input_sampling_percentage"></a> [sampling\_percentage](#input\_sampling\_percentage) | (Optional) Specifies the percentage of the data produced by the monitored application that is sampled for Application Insights telemetry. | `number` | `"100"` | no |
 | <a name="input_system_short_name"></a> [system\_short\_name](#input\_system\_short\_name) | (Required) Short abbreviation (to-three letters) of the system name that this resource belongs to (see naming convention guidelines).<br>  Will be part of the final name of the deployed resource. | `string` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | (Optional) A mapping of tags to assign to the resource. | `map(string)` | `{}` | no |
+| <a name="input_web_test_endpoints"></a> [web\_test\_endpoints](#input\_web\_test\_endpoints) | (Optional) The map of endpoints for availability tests. | `map(string)` | `{}` | no |
 | <a name="input_workspace_id"></a> [workspace\_id](#input\_workspace\_id) | (Optional) Specifies the id of a log analytics workspace resource. Changing this forces a new resource to be created. | `string` | `null` | no |
 
 ## Outputs
@@ -73,6 +75,7 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_azurerm_application_insights"></a> [azurerm\_application\_insights](#output\_azurerm\_application\_insights) | The Azure Application Insights resource. |
+| <a name="output_azurerm_application_insights_web_test"></a> [azurerm\_application\_insights\_web\_test](#output\_azurerm\_application\_insights\_web\_test) | The Azure Application Insights Web Test resource. |
 <!-- END_TF_DOCS -->
 
 [1]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_insights
