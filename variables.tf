@@ -165,7 +165,7 @@ variable "web_test_endpoints" {
   description = <<EOT
 (Optional) The map of endpoints for availability tests.
 Example:
-```hcl
+```
 {
   "webTestName" = {
     url : "Specify the URL to test."
