@@ -45,7 +45,7 @@ resource "azurerm_application_insights_web_test" "web_test" {
   location                = local.location
   resource_group_name     = var.resource_group.name
   application_insights_id = azurerm_application_insights.application_insights.id
-  kind                    = each.value.kind
+  kind                    = "ping"
   frequency               = each.value.frequency
   timeout                 = each.value.timeout
   enabled                 = each.value.enabled
@@ -54,9 +54,9 @@ resource "azurerm_application_insights_web_test" "web_test" {
 
   configuration = <<XML
 <WebTest
-  Name="${local.name}-webtest-${each.key}"
+  Name="${local.name}-availabilitytest-${each.key}"
   Id="9a572603-75a7-4754-8f17-74d3a428d7fa"
-  Enabled="${each.value.enabled}"
+  Enabled="${upper(each.value.enabled)}"
   CssProjectStructure=""
   CssIteration=""
   Timeout="${each.value.timeout}"
