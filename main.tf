@@ -79,7 +79,7 @@ resource "azurerm_application_insights_web_test" "web_test" {
       Method="GET"
       Guid="a3e2335b-cee0-ecd3-c892-ca25c94275b4"
       Version="1.1"
-      Url="${each.value.endpoint}"
+      Url="${each.value.url}"
       ThinkTime="0"
       Timeout="120"
       ParseDependentRequests="False"
