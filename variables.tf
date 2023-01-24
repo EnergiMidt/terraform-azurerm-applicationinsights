@@ -163,8 +163,16 @@ variable "tags" {
 
 variable "web_test_endpoints" {
   description = "(Optional) The map of endpoints for availability tests."
-  type        = map(string)
-  default     = {}
+  type = map(
+    object({
+      endpoint      = string
+      frequency     = number
+      timeout       = number
+      enabled       = bool
+      geo_locations = map(string)
+    })
+  )
+  default = null
 }
 
 # variable "web_test_kind" {
