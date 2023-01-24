@@ -67,7 +67,7 @@ No modules.
 | <a name="input_sampling_percentage"></a> [sampling\_percentage](#input\_sampling\_percentage) | (Optional) Specifies the percentage of the data produced by the monitored application that is sampled for Application Insights telemetry. | `number` | `"100"` | no |
 | <a name="input_system_short_name"></a> [system\_short\_name](#input\_system\_short\_name) | (Required) Short abbreviation (to-three letters) of the system name that this resource belongs to (see naming convention guidelines).<br>  Will be part of the final name of the deployed resource. | `string` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | (Optional) A mapping of tags to assign to the resource. | `map(string)` | `{}` | no |
-| <a name="input_web_test_endpoints"></a> [web\_test\_endpoints](#input\_web\_test\_endpoints) | (Optional) The map of endpoints for availability tests. | <pre>map(<br>    object({<br>      endpoint      = string<br>      frequency     = number<br>      timeout       = number<br>      enabled       = bool<br>      geo_locations = list(string)<br>    })<br>  )</pre> | `{}` | no |
+| <a name="input_web_test_endpoints"></a> [web\_test\_endpoints](#input\_web\_test\_endpoints) | (Optional) The map of endpoints for availability tests. | <pre>map(<br>    object({<br>      endpoint      = string<br>      kind          = string<br>      frequency     = number<br>      timeout       = number<br>      enabled       = bool<br>      geo_locations = list(string)<br>    })<br>  )</pre> | `{}` | no |
 | <a name="input_workspace_id"></a> [workspace\_id](#input\_workspace\_id) | (Optional) Specifies the id of a log analytics workspace resource. Changing this forces a new resource to be created. | `string` | `null` | no |
 
 ## Outputs
