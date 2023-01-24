@@ -49,6 +49,7 @@ resource "azurerm_application_insights_web_test" "web_test" {
   frequency               = each.value.frequency
   timeout                 = each.value.timeout
   enabled                 = each.value.enabled
+  retry_enabled           = true
   geo_locations           = each.value.geo_locations
 
   configuration = <<XML
