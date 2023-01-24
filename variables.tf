@@ -164,7 +164,7 @@ variable "tags" {
 variable "web_test_endpoints" {
   description = <<EOT
 (Optional) The map of endpoints for availability tests.
-For example:
+Example:
 ```hcl
 {
   "webTestName" = {
@@ -191,41 +191,3 @@ EOT
   )
   default = {}
 }
-
-# variable "web_test_kind" {
-#   description = "(Optional) The kind of web test that this web test watches. Choices are `ping` and `multistep`. Changing this forces a new resource to be created."
-#   type        = string
-#   default     = "ping"
-# }
-
-# variable "web_test_frequency" {
-#   description = "(Optional) Interval in seconds between test runs for this WebTest. Valid options are `300`, `600` and `900`. Defaults to `300`."
-#   type        = number
-#   validation {
-#     condition = contains([
-#       300,
-#       600,
-#       900,
-#     ], var.web_test_frequency)
-#     error_message = "Valid options are `300`, `600` or `900`."
-#   }
-#   default = 300
-# }
-
-# variable "web_test_timeout" {
-#   description = "(Optional) Seconds until this WebTest will timeout and fail. Default is `30`."
-#   type        = number
-#   default     = 30
-# }
-
-# variable "web_test_enabled" {
-#   description = "(Optional) Is the test actively being monitored. Default is `false`."
-#   type        = bool
-#   default     = false
-# }
-
-# variable "web_test_geo_locations" {
-#   description = "(Optional) A list of where to physically run the tests from to give global coverage for accessibility of your application."
-#   type        = list(string)
-#   default     = [""]
-# }
