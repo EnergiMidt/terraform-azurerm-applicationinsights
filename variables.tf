@@ -191,6 +191,33 @@ EOT
 }
 
 variable "monitor_action_group" {
-  type    = any
+  type = map(
+    object({
+      name       = string
+      short_name = string
+      arm_role_receiver = optional(
+        list(
+          object(
+            {
+              name                    = string
+              role_id                 = string
+              use_common_alert_schema = bool
+            }
+          )
+        )
+      )
+      email_receiver = optional(
+        list(
+          object(
+            {
+              name                    = string
+              email_address           = string
+              use_common_alert_schema = bool
+            }
+          )
+        )
+      )
+    })
+  )
   default = {}
 }
