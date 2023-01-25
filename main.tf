@@ -41,20 +41,20 @@ resource "azurerm_application_insights_web_test" "web_test" {
   # Use `azurerm_application_insights_standard_web_test` resource for standard web test.
   # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_insights_standard_web_test
 
-  name                    = "${local.name}-availabilitytest-${each.key}"
+  name                    = "${local.name}-${each.key}"
   location                = local.location
   resource_group_name     = var.resource_group.name
   application_insights_id = azurerm_application_insights.application_insights.id
-  kind                    = "ping"
-  frequency               = each.value.frequency
-  timeout                 = each.value.timeout
-  enabled                 = each.value.enabled
-  retry_enabled           = true
-  geo_locations           = each.value.geo_locations
+  kind                    = try(each.value.ping, "ping")
+  frequency               = try(each.value.frequency, 300)
+  timeout                 = try(each.value.timeout, 30)
+  enabled                 = try(each.value.enabled, true)
+  retry_enabled           = try(each.value.retry_enabled, true)
+  geo_locations           = try(each.value.geo_locations, {})
 
   configuration = <<XML
 <WebTest
-  Name="${local.name}-availabilitytest-${each.key}"
+  Name="${local.name}-${each.key}"
   Id="9a572603-75a7-4754-8f17-74d3a428d7fa"
   Enabled="${title(each.value.enabled)}"
   CssProjectStructure=""
