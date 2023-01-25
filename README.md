@@ -45,6 +45,7 @@ No modules.
 |------|------|
 | [azurerm_application_insights.application_insights](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_insights) | resource |
 | [azurerm_application_insights_web_test.web_test](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_insights_web_test) | resource |
+| [azurerm_monitor_action_group.action_group](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_action_group) | resource |
 
 ## Inputs
 
@@ -60,6 +61,7 @@ No modules.
 | <a name="input_internet_ingestion_enabled"></a> [internet\_ingestion\_enabled](#input\_internet\_ingestion\_enabled) | (Optional) Should the Application Insights component support ingestion over the Public Internet? Defaults to `true`. | `bool` | `true` | no |
 | <a name="input_internet_query_enabled"></a> [internet\_query\_enabled](#input\_internet\_query\_enabled) | (Optional) Should the Application Insights component support querying over the Public Internet? Defaults to `true`. | `bool` | `true` | no |
 | <a name="input_local_authentication_disabled"></a> [local\_authentication\_disabled](#input\_local\_authentication\_disabled) | (Optional) Disable Non-Azure AD based Auth. Defaults to `false`. | `bool` | `false` | no |
+| <a name="input_monitor_action_group"></a> [monitor\_action\_group](#input\_monitor\_action\_group) | n/a | `any` | n/a | yes |
 | <a name="input_override_location"></a> [override\_location](#input\_override\_location) | (Optional) Override the location of the resource. Under normal circumstances, it should not be used. | `string` | `null` | no |
 | <a name="input_override_name"></a> [override\_name](#input\_override\_name) | (Optional) Override the name of the resource. Under normal circumstances, it should not be used. | `string` | `null` | no |
 | <a name="input_resource_group"></a> [resource\_group](#input\_resource\_group) | (Required) The resource group in which to create the resource. | `any` | n/a | yes |
@@ -67,7 +69,7 @@ No modules.
 | <a name="input_sampling_percentage"></a> [sampling\_percentage](#input\_sampling\_percentage) | (Optional) Specifies the percentage of the data produced by the monitored application that is sampled for Application Insights telemetry. | `number` | `"100"` | no |
 | <a name="input_system_short_name"></a> [system\_short\_name](#input\_system\_short\_name) | (Required) Short abbreviation (to-three letters) of the system name that this resource belongs to (see naming convention guidelines).<br>  Will be part of the final name of the deployed resource. | `string` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | (Optional) A mapping of tags to assign to the resource. | `map(string)` | `{}` | no |
-| <a name="input_web_test_endpoints"></a> [web\_test\_endpoints](#input\_web\_test\_endpoints) | (Optional) The map of endpoints for availability tests.<br>Example:<pre>{<br>  "webTestName" = {<br>    url : "Specify the URL to test."<br>    frequency : "Interval in seconds between test runs for this WebTest. Valid options are 300, 600 and 900."<br>    timeout : "Seconds until this WebTest will timeout and fail."<br>    enabled : "Is the test actively being monitored?"<br>    geo_locations : "A list of where to physically run the tests from to give global coverage for accessibility of your application."<br>  }<br>}</pre> | <pre>map(<br>    object({<br>      url           = string<br>      frequency     = number<br>      timeout       = number<br>      enabled       = bool<br>      geo_locations = list(string)<br>    })<br>  )</pre> | `{}` | no |
+| <a name="input_web_test_endpoints"></a> [web\_test\_endpoints](#input\_web\_test\_endpoints) | (Optional) The map of endpoints for availability tests.<br>Example:<pre>{<br>  "webTestName" = {<br>    url : "Specify the URL to test."<br>    frequency : "Interval in seconds between test runs for this WebTest. Valid options are 300, 600 and 900."<br>    timeout : "Seconds until this WebTest will timeout and fail."<br>    enabled : "Is the test actively being monitored?"<br>    geo_locations : "A list of where to physically run the tests from to give global coverage for accessibility of your application."<br>  }<br>}</pre> | <pre>map(<br>    object({<br>      url           = string<br>      frequency     = optional(number)<br>      timeout       = optional(number)<br>      enabled       = optional(bool)<br>      geo_locations = optional(list(string))<br>    })<br>  )</pre> | `{}` | no |
 | <a name="input_workspace_id"></a> [workspace\_id](#input\_workspace\_id) | (Optional) Specifies the id of a log analytics workspace resource. Changing this forces a new resource to be created. | `string` | `null` | no |
 
 ## Outputs
