@@ -163,7 +163,7 @@ variable "tags" {
 
 variable "web_test_endpoints" {
   description = <<EOT
-(Optional) The map of endpoints for availability tests.
+(Optional) The map of web test endpoint(s).
 Example:
 ```
 {
@@ -184,6 +184,7 @@ EOT
       frequency     = optional(number)
       timeout       = optional(number)
       enabled       = optional(bool)
+      retry_enabled = optional(bool)
       geo_locations = optional(list(string))
     })
   )
@@ -191,6 +192,45 @@ EOT
 }
 
 variable "monitor_action_group" {
+  description = <<EOT
+(Optional) The map of action group(s).
+Example:
+```
+{
+  smart_detect = {
+    name       = "Application Insights Smart Detection"
+    short_name = "SmartDetect"
+
+    arm_role_receiver = [
+      {
+        name                    = data.azurerm_role_definition.roles["Monitoring Contributor"].name
+        role_id                 = split("/", data.azurerm_role_definition.roles["Monitoring Contributor"].id)[4] # https://github.com/hashicorp/terraform-provider-azurerm/issues/8553
+        use_common_alert_schema = true
+      },
+      {
+        name                    = data.azurerm_role_definition.roles["Monitoring Reader"].name
+        role_id                 = split("/", data.azurerm_role_definition.roles["Monitoring Reader"].id)[4] # https://github.com/hashicorp/terraform-provider-azurerm/issues/8553
+        use_common_alert_schema = false
+      },
+    ]
+
+    email_receiver = [
+      {
+        name                    = "Ola Nordmann"
+        email_address           = "ola@nordmann.no"
+        use_common_alert_schema = true
+      },
+      {
+        name                    = "Kari Nordmann"
+        email_address           = "kari@nordmann.no"
+        use_common_alert_schema = false
+      }
+    ]
+  }
+}
+```
+EOT
+
   type = map(
     object({
       name       = string
