@@ -98,9 +98,9 @@ XML
 resource "azurerm_monitor_action_group" "action_group" {
   for_each = var.monitor_action_group
 
-  name                = "Application Insights Smart Detection"
+  name                = "Application Insights Smart Detection Monitor"
   resource_group_name = var.resource_group.name
-  short_name          = "SmartDetect"
+  short_name          = "SmartDetectM"
 
   dynamic "arm_role_receiver" {
     for_each = toset(each.value.arm_role_receiver)
