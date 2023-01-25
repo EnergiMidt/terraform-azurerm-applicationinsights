@@ -224,7 +224,7 @@ EOT
     object({
       name              = string
       short_name        = string
-      arm_role_receiver = optional(set(object({})))
+      arm_role_receiver = optional(any)
       email_receiver = optional(
         list(
           object(
