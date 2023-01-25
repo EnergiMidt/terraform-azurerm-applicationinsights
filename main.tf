@@ -107,8 +107,8 @@ resource "azurerm_monitor_action_group" "action_group" {
     for_each = each.value.arm_role_receiver
 
     content {
-      name                    = arm_role_receiver.value[arm_role_receiver.key].name
-      role_id                 = split("/", arm_role_receiver.value[arm_role_receiver.key].id)[4] # https://github.com/hashicorp/terraform-provider-azurerm/issues/8553
+      name                    = arm_role_receiver.value.name
+      role_id                 = split("/", arm_role_receiver.value.id)[4] # https://github.com/hashicorp/terraform-provider-azurerm/issues/8553
       use_common_alert_schema = true
     }
   }
