@@ -181,11 +181,15 @@ EOT
   type = map(
     object({
       url           = string
-      frequency     = number
-      timeout       = number
-      enabled       = bool
-      geo_locations = list(string)
+      frequency     = optional(number)
+      timeout       = optional(number)
+      enabled       = optional(bool)
+      geo_locations = optional(list(string))
     })
   )
   default = {}
+}
+
+variable "monitor_action_group" {
+  type = any
 }

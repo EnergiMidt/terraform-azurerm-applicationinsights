@@ -94,3 +94,31 @@ XML
 
   tags = var.tags
 }
+
+resource "azurerm_monitor_action_group" "action_group" {
+  for_each = var.monitor_action_group
+
+  name                = "Application Insights Smart Detection"
+  resource_group_name = var.resource_group.name
+  short_name          = "SmartDetect"
+
+  dynamic "arm_role_receiver" {
+    for_each = toset(each.value.arm_role_receiver)
+
+    content {
+      name                    = arm_role_receiver.value.name
+      role_id                 = arm_role_receiver.value.role_id
+      use_common_alert_schema = arm_role_receiver.value.use_common_alert_schema
+    }
+  }
+
+  dynamic "email_receiver" {
+    for_each = toset(each.value.email_receiver)
+
+    content {
+      name                    = email_receiver.value.name
+      email_address           = email_receiver.value.email_address
+      use_common_alert_schema = email_receiver.value.use_common_alert_schema
+    }
+  }
+}
