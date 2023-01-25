@@ -103,7 +103,8 @@ resource "azurerm_monitor_action_group" "action_group" {
   short_name          = each.value.short_name
 
   dynamic "arm_role_receiver" {
-    for_each = toset(each.value.arm_role_receiver)
+    # for_each = toset(each.value.arm_role_receiver)
+    for_each = each.value.arm_role_receiver
 
     content {
       name                    = arm_role_receiver.value.roles[arm_role_receiver.key].name
