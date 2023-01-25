@@ -201,18 +201,7 @@ Example:
     name       = "Application Insights Smart Detection"
     short_name = "SmartDetect"
 
-    arm_role_receiver = [
-      {
-        name                    = data.azurerm_role_definition.roles["Monitoring Contributor"].name
-        role_id                 = split("/", data.azurerm_role_definition.roles["Monitoring Contributor"].id)[4] # https://github.com/hashicorp/terraform-provider-azurerm/issues/8553
-        use_common_alert_schema = true
-      },
-      {
-        name                    = data.azurerm_role_definition.roles["Monitoring Reader"].name
-        role_id                 = split("/", data.azurerm_role_definition.roles["Monitoring Reader"].id)[4] # https://github.com/hashicorp/terraform-provider-azurerm/issues/8553
-        use_common_alert_schema = false
-      },
-    ]
+    arm_role_receiver = data.azurerm_role_definition.roles
 
     email_receiver = [
       {
@@ -233,19 +222,9 @@ EOT
 
   type = map(
     object({
-      name       = string
-      short_name = string
-      arm_role_receiver = optional(
-        list(
-          object(
-            {
-              name                    = string
-              role_id                 = string
-              use_common_alert_schema = bool
-            }
-          )
-        )
-      )
+      name              = string
+      short_name        = string
+      arm_role_receiver = optional(set(object({})))
       email_receiver = optional(
         list(
           object(

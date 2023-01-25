@@ -98,19 +98,29 @@ XML
 resource "azurerm_monitor_action_group" "action_group" {
   for_each = var.monitor_action_group
 
-  name                = "${each.value.name}${each.key}"
+  name                = each.value.name
   resource_group_name = var.resource_group.name
   short_name          = each.value.short_name
 
   dynamic "arm_role_receiver" {
-    for_each = toset(each.value.arm_role_receiver)
+    for_each = toset(each.value.arm_roles)
 
     content {
-      name                    = arm_role_receiver.value.name
-      role_id                 = arm_role_receiver.value.role_id
-      use_common_alert_schema = arm_role_receiver.value.use_common_alert_schema
+      name                    = arm_role_receiver.value.roles[arm_role_receiver.key].name
+      role_id                 = split("/", arm_role_receiver.value.roles[arm_role_receiver.key].id)[4] # https://github.com/hashicorp/terraform-provider-azurerm/issues/8553
+      use_common_alert_schema = true
     }
   }
+
+  # dynamic "arm_role_receiver" {
+  #   for_each = toset(each.value.arm_role_receiver)
+
+  #   content {
+  #     name                    = arm_role_receiver.value.name
+  #     role_id                 = arm_role_receiver.value.role_id
+  #     use_common_alert_schema = arm_role_receiver.value.use_common_alert_schema
+  #   }
+  # }
 
   dynamic "email_receiver" {
     for_each = toset(each.value.email_receiver)
