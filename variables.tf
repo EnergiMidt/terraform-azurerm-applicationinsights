@@ -167,12 +167,12 @@ variable "web_test_endpoints" {
 Example:
 ```
 {
-  "webTestName" = {
-    url : "Specify the URL to test."
-    frequency : "Interval in seconds between test runs for this WebTest. Valid options are 300, 600 and 900."
-    timeout : "Seconds until this WebTest will timeout and fail."
-    enabled : "Is the test actively being monitored?"
-    geo_locations : "A list of where to physically run the tests from to give global coverage for accessibility of your application."
+  "availabilitytest-client" = {
+    url  = "https://client.example.com"
+    geo_locations = [    # https://learn.microsoft.com/en-gb/azure/azure-monitor/app/monitor-web-app-availability#azure
+      "emea-gb-db3-azr", # North Europe
+      "emea-nl-ams-azr"  # West Europe
+    ]
   }
 }
 ```
