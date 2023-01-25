@@ -191,5 +191,6 @@ EOT
 }
 
 variable "monitor_action_group" {
-  type = any
+  type    = any
+  default = {}
 }
