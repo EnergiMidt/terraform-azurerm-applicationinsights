@@ -50,7 +50,7 @@ resource "azurerm_application_insights_web_test" "web_test" {
   timeout                 = try(each.value.timeout, 30)
   enabled                 = try(each.value.enabled, true)
   retry_enabled           = try(each.value.retry_enabled, true)
-  geo_locations           = try(each.value.geo_locations, []) # https://learn.microsoft.com/en-gb/azure/azure-monitor/app/monitor-web-app-availability#azure
+  geo_locations           = each.value.geo_locations # https://learn.microsoft.com/en-gb/azure/azure-monitor/app/monitor-web-app-availability#azure
 
   configuration = <<XML
 <WebTest
