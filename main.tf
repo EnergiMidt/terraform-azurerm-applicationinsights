@@ -121,4 +121,6 @@ resource "azurerm_monitor_action_group" "action_group" {
       use_common_alert_schema = email_receiver.value.use_common_alert_schema
     }
   }
+
+  tags = var.tags
 }
