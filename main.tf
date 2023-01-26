@@ -56,7 +56,7 @@ resource "azurerm_application_insights_web_test" "web_test" {
 <WebTest
   Name="${local.name}-${each.key}"
   Id="9a572603-75a7-4754-8f17-74d3a428d7fa"
-  Enabled="${each.value.enabled}"
+  Enabled="${title(each.value.enabled)}"
   CssProjectStructure=""
   CssIteration=""
   Timeout="${each.value.timeout}"
