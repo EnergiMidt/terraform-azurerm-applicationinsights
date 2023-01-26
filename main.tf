@@ -51,7 +51,6 @@ resource "azurerm_application_insights_web_test" "web_test" {
   enabled                 = try(each.value.enabled, true)
   retry_enabled           = try(each.value.retry_enabled, true)
   geo_locations = try(each.value.geo_locations, [
-    # https://learn.microsoft.com/en-gb/azure/azure-monitor/app/monitor-web-app-availability#azure
     "emea-gb-db3-azr", # North Europe
     "emea-nl-ams-azr"  # West Europe
   ])
