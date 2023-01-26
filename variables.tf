@@ -169,6 +169,8 @@ Example:
 {
   availabilitytest-client" = {
     url  = "https://client.example.com"
+    timeout       = 30
+    enabled       = true
     geo_locations = [    # https://learn.microsoft.com/en-gb/azure/azure-monitor/app/monitor-web-app-availability#azure
       "emea-gb-db3-azr", # North Europe
       "emea-nl-ams-azr"  # West Europe
@@ -183,8 +185,8 @@ EOT
       url           = string
       kind          = optional(string)
       frequency     = optional(number)
-      timeout       = optional(number)
-      enabled       = optional(bool)
+      timeout       = number
+      enabled       = bool
       retry_enabled = optional(bool)
       geo_locations = list(string)
     })

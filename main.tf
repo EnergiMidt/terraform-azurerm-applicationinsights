@@ -47,8 +47,8 @@ resource "azurerm_application_insights_web_test" "web_test" {
   application_insights_id = azurerm_application_insights.application_insights.id
   kind                    = try(each.value.ping, "ping")
   frequency               = try(each.value.frequency, 300)
-  timeout                 = try(each.value.timeout, 30)
-  enabled                 = try(each.value.enabled, true)
+  timeout                 = each.value.timeout
+  enabled                 = each.value.enabled
   retry_enabled           = try(each.value.retry_enabled, true)
   geo_locations           = each.value.geo_locations
 
@@ -56,10 +56,10 @@ resource "azurerm_application_insights_web_test" "web_test" {
 <WebTest
   Name="${local.name}-${each.key}"
   Id="9a572603-75a7-4754-8f17-74d3a428d7fa"
-  Enabled="${title(jsonencode(try(each.value.enabled, true)))}"
+  Enabled="${each.value.enabled}"
   CssProjectStructure=""
   CssIteration=""
-  Timeout="${jsonencode(try(each.value.timeout, 30))}"
+  Timeout="${each.value.timeout}"
   WorkItemIds=""
   xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010"
   Description=""
@@ -77,7 +77,7 @@ resource "azurerm_application_insights_web_test" "web_test" {
       Version="1.1"
       Url="${each.value.url}"
       ThinkTime="0"
-      Timeout="${jsonencode(try(each.value.timeout, 30))}"
+      Timeout="${each.value.timeout}"
       ParseDependentRequests="False"
       FollowRedirects="True"
       RecordResult="True"
