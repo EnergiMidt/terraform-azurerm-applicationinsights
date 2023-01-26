@@ -161,18 +161,21 @@ variable "tags" {
   default     = {}
 }
 
-variable "web_test_endpoints" {
+variable "web_test" {
   description = <<EOT
-(Optional) The map of endpoints for availability tests.
+(Optional) The map of web test(s).
 Example:
 ```
 {
-  "webTestName" = {
-    url : "Specify the URL to test."
-    frequency : "Interval in seconds between test runs for this WebTest. Valid options are 300, 600 and 900."
-    timeout : "Seconds until this WebTest will timeout and fail."
-    enabled : "Is the test actively being monitored?"
-    geo_locations : "A list of where to physically run the tests from to give global coverage for accessibility of your application."
+  availabilitytest-client" = {
+    url  = "https://client.example.com"
+    timeout       = 30
+    enabled       = true
+    retry_enabled = true
+    geo_locations = [    # https://learn.microsoft.com/en-gb/azure/azure-monitor/app/monitor-web-app-availability#azure
+      "emea-gb-db3-azr", # North Europe
+      "emea-nl-ams-azr"  # West Europe
+    ]
   }
 }
 ```
@@ -181,10 +184,67 @@ EOT
   type = map(
     object({
       url           = string
-      frequency     = number
+      kind          = optional(string)
+      frequency     = optional(number)
       timeout       = number
       enabled       = bool
+      retry_enabled = bool
       geo_locations = list(string)
+    })
+  )
+  default = {}
+}
+
+variable "action_group" {
+  description = <<EOT
+(Optional) The map of action group(s).
+Example:
+```
+data "azurerm_role_definition" "monitoring_roles" {
+  for_each = toset(["Monitoring Contributor", "Monitoring Reader"])
+  name     = each.value
+}
+
+{
+  smart_detect = {
+    name       = "Application Insights Smart Detection"
+    short_name = "SmartDetect"
+
+    arm_role_receiver = data.azurerm_role_definition.monitoring_roles
+
+    email_receiver = [
+      {
+        name                    = "Ola Nordmann"
+        email_address           = "ola@nordmann.no"
+        use_common_alert_schema = true
+      },
+      {
+        name                    = "Kari Nordmann"
+        email_address           = "kari@nordmann.no"
+        use_common_alert_schema = false
+      }
+    ]
+  }
+}
+```
+EOT
+
+  type = map(
+    object({
+      name              = string
+      short_name        = string
+      arm_role_receiver = optional(any)
+      email_receiver = optional(
+        list(
+          object(
+            {
+              name                    = string
+              email_address           = string
+              use_common_alert_schema = bool
+            }
+          )
+        )
+      )
     })
   )
   default = {}
