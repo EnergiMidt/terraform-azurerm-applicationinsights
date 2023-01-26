@@ -32,7 +32,7 @@ resource "azurerm_application_insights" "application_insights" {
 }
 
 resource "azurerm_application_insights_web_test" "web_test" {
-  for_each = var.web_test_endpoints
+  for_each = var.web_test
 
   # This is a classic web test `azurerm_application_insights_web_test` resource.
   # https://github.com/hashicorp/terraform-provider-azurerm/pull/19954#issue-1527978917
@@ -50,7 +50,11 @@ resource "azurerm_application_insights_web_test" "web_test" {
   timeout                 = try(each.value.timeout, 30)
   enabled                 = try(each.value.enabled, true)
   retry_enabled           = try(each.value.retry_enabled, true)
-  geo_locations           = each.value.geo_locations # https://learn.microsoft.com/en-gb/azure/azure-monitor/app/monitor-web-app-availability#azure
+  geo_locations = try(each.value.geo_locations, [
+    # https://learn.microsoft.com/en-gb/azure/azure-monitor/app/monitor-web-app-availability#azure
+    "emea-gb-db3-azr", # North Europe
+    "emea-nl-ams-azr"  # West Europe
+  ])
 
   configuration = <<XML
 <WebTest
@@ -96,7 +100,7 @@ XML
 }
 
 resource "azurerm_monitor_action_group" "action_group" {
-  for_each = var.monitor_action_group
+  for_each = var.action_group
 
   name                = each.value.name
   resource_group_name = var.resource_group.name

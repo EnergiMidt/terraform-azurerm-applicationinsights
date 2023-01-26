@@ -161,13 +161,13 @@ variable "tags" {
   default     = {}
 }
 
-variable "web_test_endpoints" {
+variable "web_test" {
   description = <<EOT
-(Optional) The map of web test endpoint(s).
+(Optional) The map of web test(s).
 Example:
 ```
 {
-  "availabilitytest-client" = {
+  availabilitytest-client" = {
     url  = "https://client.example.com"
     geo_locations = [    # https://learn.microsoft.com/en-gb/azure/azure-monitor/app/monitor-web-app-availability#azure
       "emea-gb-db3-azr", # North Europe
@@ -186,23 +186,28 @@ EOT
       timeout       = optional(number)
       enabled       = optional(bool)
       retry_enabled = optional(bool)
-      geo_locations = list(string)
+      geo_locations = optional(list(string))
     })
   )
   default = {}
 }
 
-variable "monitor_action_group" {
+variable "action_group" {
   description = <<EOT
 (Optional) The map of action group(s).
 Example:
 ```
+data "azurerm_role_definition" "monitoring_roles" {
+  for_each = toset(["Monitoring Contributor", "Monitoring Reader"])
+  name     = each.value
+}
+
 {
   smart_detect = {
     name       = "Application Insights Smart Detection"
     short_name = "SmartDetect"
 
-    arm_role_receiver = data.azurerm_role_definition.roles
+    arm_role_receiver = data.azurerm_role_definition.monitoring_roles
 
     email_receiver = [
       {
