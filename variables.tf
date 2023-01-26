@@ -186,7 +186,7 @@ EOT
       timeout       = optional(number)
       enabled       = optional(bool)
       retry_enabled = optional(bool)
-      geo_locations = optional(list(string))
+      geo_locations = list(string)
     })
   )
   default = {}

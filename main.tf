@@ -50,7 +50,7 @@ resource "azurerm_application_insights_web_test" "web_test" {
   timeout                 = try(each.value.timeout, 30)
   enabled                 = try(each.value.enabled, true)
   retry_enabled           = try(each.value.retry_enabled, true)
-  geo_locations           = try(each.value.geo_locations, tolist(["emea-gb-db3-azr", "emea-nl-ams-azr"]))
+  geo_locations           = each.value.geo_locations
 
   configuration = <<XML
 <WebTest
