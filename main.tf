@@ -103,7 +103,7 @@ resource "azurerm_monitor_action_group" "action_group" {
   short_name          = each.value.short_name
 
   dynamic "arm_role_receiver" {
-    for_each = toset(each.value.arm_role_receiver)
+    for_each = (each.value.arm_role_receiver == null) ? [] : toset(each.value.arm_role_receiver)
 
     content {
       name                    = arm_role_receiver.value.name
@@ -113,7 +113,7 @@ resource "azurerm_monitor_action_group" "action_group" {
   }
 
   dynamic "email_receiver" {
-    for_each = toset(each.value.email_receiver)
+    for_each = (each.value.email_receiver == null) ? [] : toset(each.value.email_receiver)
 
     content {
       name                    = email_receiver.value.name
