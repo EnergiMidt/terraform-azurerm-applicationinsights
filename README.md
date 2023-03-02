@@ -33,7 +33,7 @@ git fetch --all --tags --prune --prune-tags \
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.40.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.45.0 |
 
 ## Modules
 
@@ -45,13 +45,11 @@ No modules.
 |------|------|
 | [azurerm_application_insights.application_insights](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_insights) | resource |
 | [azurerm_application_insights_web_test.web_test](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_insights_web_test) | resource |
-| [azurerm_monitor_action_group.action_group](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_action_group) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_action_group"></a> [action\_group](#input\_action\_group) | (Optional) The map of action group(s).<br>Example:<pre>data "azurerm_role_definition" "monitoring_roles" {<br>  for_each = toset(["Monitoring Contributor", "Monitoring Reader"])<br>  name     = each.value<br>}<br><br>{<br>  smart_detect = {<br>    name       = "Application Insights Smart Detection"<br>    short_name = "SmartDetect"<br><br>    arm_role_receiver = data.azurerm_role_definition.monitoring_roles<br><br>    email_receiver = [<br>      {<br>        name                    = "Ola Nordmann"<br>        email_address           = "ola@nordmann.no"<br>        use_common_alert_schema = true<br>      },<br>      {<br>        name                    = "Kari Nordmann"<br>        email_address           = "kari@nordmann.no"<br>        use_common_alert_schema = false<br>      }<br>    ]<br>  }<br>}</pre> | <pre>map(<br>    object({<br>      name              = string<br>      short_name        = string<br>      arm_role_receiver = optional(any)<br>      email_receiver = optional(<br>        list(<br>          object(<br>            {<br>              name                    = string<br>              email_address           = string<br>              use_common_alert_schema = bool<br>            }<br>          )<br>        )<br>      )<br>    })<br>  )</pre> | `{}` | no |
 | <a name="input_app_name"></a> [app\_name](#input\_app\_name) | (Required) Name of this resource within the system it belongs to (see naming convention guidelines).<br>  Will be part of the final name of the deployed resource. | `string` | n/a | yes |
 | <a name="input_application_type"></a> [application\_type](#input\_application\_type) | (Optional) Specifies the type of Application Insights to create. Valid values are `ios` for iOS, `java` for Java web, `MobileCenter` for App Center, `Node.JS` for Node.js, `other` for General, `phone` for Windows Phone, `store` for Windows Store and `web` for ASP.NET. Please note these values are case sensitive; unmatched values are treated as ASP.NET by Azure. Changing this do not force a new resource to be created. | `string` | `"other"` | no |
 | <a name="input_daily_data_cap_in_gb"></a> [daily\_data\_cap\_in\_gb](#input\_daily\_data\_cap\_in\_gb) | (Optional) Specifies the Application Insights component daily data volume cap in GB. | `number` | `0.15` | no |
