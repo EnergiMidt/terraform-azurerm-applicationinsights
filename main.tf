@@ -94,33 +94,3 @@ XML
 
   tags = var.tags
 }
-
-resource "azurerm_monitor_action_group" "action_group" {
-  for_each = var.action_group
-
-  name                = each.value.name
-  resource_group_name = var.resource_group.name
-  short_name          = each.value.short_name
-
-  dynamic "arm_role_receiver" {
-    for_each = (each.value.arm_role_receiver == null) ? {} : each.value.arm_role_receiver
-
-    content {
-      name                    = arm_role_receiver.value.name
-      role_id                 = split("/", arm_role_receiver.value.id)[4] # https://github.com/hashicorp/terraform-provider-azurerm/issues/8553
-      use_common_alert_schema = true
-    }
-  }
-
-  dynamic "email_receiver" {
-    for_each = (each.value.email_receiver == null) ? [] : toset(each.value.email_receiver)
-
-    content {
-      name                    = email_receiver.value.name
-      email_address           = email_receiver.value.email_address
-      use_common_alert_schema = email_receiver.value.use_common_alert_schema
-    }
-  }
-
-  tags = var.tags
-}
