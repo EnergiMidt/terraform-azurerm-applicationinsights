@@ -73,7 +73,7 @@ No modules.
 | <a name="input_system_short_name"></a> [system\_short\_name](#input\_system\_short\_name) | (Required) Short abbreviation (to-three letters) of the system name that this resource belongs to (see naming convention guidelines).<br>  Will be part of the final name of the deployed resource. | `string` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | (Optional) A mapping of tags to assign to the resource. | `map(string)` | `{}` | no |
 | <a name="input_web_test"></a> [web\_test](#input\_web\_test) | (Optional) The map of web test(s).<br>Example:<pre>{<br>  availabilitytest-client" = {<br>    url  = "https://client.example.com"<br>    timeout       = 30<br>    enabled       = true<br>    retry_enabled = true<br>    geo_locations = [    # https://learn.microsoft.com/en-gb/azure/azure-monitor/app/monitor-web-app-availability#azure<br>      "emea-gb-db3-azr", # North Europe<br>      "emea-nl-ams-azr"  # West Europe<br>    ]<br>  }<br>}</pre> | <pre>map(<br>    object({<br>      url           = string<br>      kind          = optional(string)<br>      frequency     = optional(number)<br>      timeout       = number<br>      enabled       = bool<br>      retry_enabled = bool<br>      geo_locations = list(string)<br>    })<br>  )</pre> | `{}` | no |
-| <a name="input_workspace_id"></a> [workspace\_id](#input\_workspace\_id) | (Optional) Specifies the id of a log analytics workspace resource. Changing this forces a new resource to be created. | `string` | `null` | no |
+| <a name="input_workspace_id"></a> [workspace\_id](#input\_workspace\_id) | (Required) Specifies the id of a log analytics workspace resource. Changing this forces a new resource to be created. | `string` | n/a | yes |
 
 ## Outputs
 
