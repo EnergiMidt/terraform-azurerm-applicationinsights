@@ -2,6 +2,11 @@
 
 Manages an Application Insights component.
 
+Note: Classic Applications Insights will be retired on 29 February 2024.
+
+- [We’re retiring Classic Application Insights on 29 February 2024.](https://azure.microsoft.com/en-us/updates/we-re-retiring-classic-application-insights-on-29-february-2024/)
+- [Classic application insights will be retired on 29 February 2024—migrate to workspace-based application insights.](https://learn.microsoft.com/en-us/answers/questions/1339195/classic-application-insights-will-be-retired-on-29)
+
 ## Getting Started
 
 - Format and validate Terraform code before commit.

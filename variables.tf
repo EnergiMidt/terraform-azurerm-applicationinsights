@@ -126,8 +126,7 @@ variable "disable_ip_masking" {
 }
 
 variable "workspace_id" {
-  description = "(Optional) Specifies the id of a log analytics workspace resource. Changing this forces a new resource to be created."
-  default     = null
+  description = "(Required) Specifies the id of a log analytics workspace resource. Changing this forces a new resource to be created."
   type        = string
 }
 
