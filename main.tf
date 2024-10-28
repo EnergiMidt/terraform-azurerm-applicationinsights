@@ -3,6 +3,13 @@ locals {
   location = var.override_location == null ? var.resource_group.location : var.override_location
 
   web_test = concat(azurerm_application_insights_web_test.web_test[*], [null])[0]
+
+  # https://github.com/hashicorp/terraform-provider-azurerm/issues/16569#issuecomment-1191501450
+  # Workaround for always seeing a change in the terraform plan for this hidden-link:...
+  # This, "... = Resource", fixes plan for con-connectivity. There may be other other tags that should be added.
+  appi_dynamic_tags = tomap({
+    "hidden-link:${azurerm_application_insights.application_insights.id}" = "Resource"
+  })
 }
 
 resource "azurerm_application_insights" "application_insights" {
@@ -92,5 +99,5 @@ resource "azurerm_application_insights_web_test" "web_test" {
 </WebTest>
 XML
 
-  tags = var.tags
+  tags = merge(var.tags, local.appi_dynamic_tags)
 }
